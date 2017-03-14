@@ -1,0 +1,8 @@
+name: 'Datetime Extras'
+type: module
+description: 'Extends core Datetime and Datetime Range functionality.'
+version: VERSION
+core: 8.x
+dependencies:
+  - datetime
+  - datetime_range
