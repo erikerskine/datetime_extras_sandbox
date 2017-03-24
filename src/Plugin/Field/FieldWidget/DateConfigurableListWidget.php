@@ -55,8 +55,6 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
-
     $date_order = $this->getSetting('date_order');
 
     // Set up the date part order array.
@@ -73,6 +71,14 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
         $date_part_order = ['year', 'month'];
         break;
     }
+
+    // Work around core bug.
+    // @TODO: Fix after https://www.drupal.org/node/2863897
+    if (isset($date_part_order)) {
+      $this->setSetting('date_order', 'YMD');
+    }
+
+    $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
     if (isset($date_part_order)) {
       $element['value']['#date_part_order'] = $date_part_order;
