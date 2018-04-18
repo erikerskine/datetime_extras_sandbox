@@ -23,8 +23,9 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    $settings = parent::defaultSettings();
-    return $settings;
+    return [
+        'date_year_range' => '1900:2050',
+      ] + parent::defaultSettings();
   }
 
   /**
@@ -39,6 +40,13 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
       'YM' => $this->t('Year/Month'),
     ];
 
+    $elements['date_year_range'] = [
+      '#type' => 'textfield',
+      '#title' => t('Date year range'),
+      '#description' => "Example: 2000:2010",
+      '#default_value' => $this->getSetting('date_year_range'),
+    ];
+
     return $elements;
   }
 
@@ -47,6 +55,8 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
    */
   public function settingsSummary() {
     $summary = parent::settingsSummary();
+
+    $summary[] = t('Date year range: @range', ['@range' => $this->getSetting('date_year_range')]);
 
     return $summary;
   }
@@ -82,6 +92,12 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
 
     if (isset($date_part_order)) {
       $element['value']['#date_part_order'] = $date_part_order;
+    }
+
+    // Set year start / end
+    $year_range = $this->getSetting('date_year_range');
+    if (isset($year_range)) {
+      $element['value']['#date_year_range'] = $year_range;
     }
 
     return $element;
