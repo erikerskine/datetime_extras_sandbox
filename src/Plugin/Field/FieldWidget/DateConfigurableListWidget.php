@@ -89,6 +89,7 @@ class DateConfigurableListWidget extends DateTimeDatelistWidget {
     }
 
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
+    $this->setSetting('date_order', $date_order);
 
     if (isset($date_part_order)) {
       $element['value']['#date_part_order'] = $date_part_order;
