@@ -19,3 +19,14 @@ function datetime_extras_help($route_name, RouteMatchInterface $route_match) {
       return $output;
   }
 }
+
+/**
+ * Implements hook_field_widget_info_alter().
+ *
+ * Remove the daterange_duration widget unless duration_field module is enabled.
+ */
+function datetime_extras_field_widget_info_alter(array &$info) {
+  if (!\Drupal::moduleHandler()->moduleExists('duration_field')) {
+    unset($info['daterange_duration']);
+  }
+}
