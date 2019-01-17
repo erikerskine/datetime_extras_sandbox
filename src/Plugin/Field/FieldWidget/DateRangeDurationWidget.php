@@ -211,7 +211,7 @@ class DateRangeDurationWidget extends DateRangeDefaultWidget {
     // Use #states to hide the end_value if we're using a duration.
     // Sadly [#2419131] means #states doesn't work directly on a datetime.
     // @todo This hack breaks the label for end_value.
-    // @see https://www.drupal.org/project/drupal/issues/2419131
+    // @see https://www.drupal.org/node/3026456
     $form_element['end_value']['#theme_wrappers'] = ['container'];
     $form_element['end_value']['#states']['visible'][] = [
       ':input[name="' . $end_type_name . '"]' => ['value' => 'end_date'],
