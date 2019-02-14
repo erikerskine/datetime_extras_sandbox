@@ -259,7 +259,7 @@ class DateRangeDurationWidgetTest extends DateTestBase {
 
     // Test the widget for validation notifications.
     // Change the widget settings to use the full duration granularity, but
-    // no default duration
+    // no default duration.
     entity_get_form_display($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
       ->setComponent($field_name, [
         'type' => 'daterange_duration',
