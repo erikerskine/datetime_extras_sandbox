@@ -2,106 +2,31 @@
 
 namespace Drupal\datetime_extras\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\datetime\Plugin\Field\FieldWidget\DateTimeDatelistWidget;
+use Drupal\Core\Field\FieldDefinitionInterface;
 
 /**
  * Plugin implementation of the 'datatime_extras_configurable_list' widget.
  *
  * @FieldWidget(
  *   id = "datatime_extras_configurable_list",
- *   label = @Translation("Configurable list"),
+ *   label = @Translation("Configurable list (deprecated)"),
  *   field_types = {
  *     "datetime"
  *   }
  * )
+ *
+ * @deprecated in 1.x and will be removed before 2.0. Use
+ * \Drupal\datetime_extras\Plugin\Field\FieldWidget\DateTimeDatelistNoTimeWidget
+ * instead.
  */
-class DateConfigurableListWidget extends DateTimeDatelistWidget {
+class DateConfigurableListWidget extends DateTimeDatelistNoTimeWidget {
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
-    return [
-        'date_year_range' => '1900:2050',
-      ] + parent::defaultSettings();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
-    $elements = parent::settingsForm($form, $form_state);
-
-    $elements['date_order']['#options'] += [
-      'Y' => $this->t('Year'),
-      'MY' => $this->t('Month/Year'),
-      'YM' => $this->t('Year/Month'),
-    ];
-
-    $elements['date_year_range'] = [
-      '#type' => 'textfield',
-      '#title' => t('Date year range'),
-      '#description' => "Example: 2000:2010",
-      '#default_value' => $this->getSetting('date_year_range'),
-    ];
-
-    return $elements;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function settingsSummary() {
-    $summary = parent::settingsSummary();
-
-    $summary[] = t('Date year range: @range', ['@range' => $this->getSetting('date_year_range')]);
-
-    return $summary;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $date_order = $this->getSetting('date_order');
-
-    // Set up the date part order array.
-    switch ($date_order) {
-      case 'Y':
-        $date_part_order = ['year'];
-        break;
-
-      case 'MY':
-        $date_part_order = ['month', 'year'];
-        break;
-
-      case 'YM':
-        $date_part_order = ['year', 'month'];
-        break;
-    }
-
-    // Work around core bug.
-    // @TODO: Fix after https://www.drupal.org/node/2863897
-    if (isset($date_part_order)) {
-      $this->setSetting('date_order', 'YMD');
-    }
-
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $this->setSetting('date_order', $date_order);
-
-    if (isset($date_part_order)) {
-      $element['value']['#date_part_order'] = $date_part_order;
-    }
-
-    // Set year start / end
-    $year_range = $this->getSetting('date_year_range');
-    if (isset($year_range)) {
-      $element['value']['#date_year_range'] = $year_range;
-    }
-
-    return $element;
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
+    @trigger_error('The ' . __NAMESPACE__ . '\DateConfigurableListWidget is deprecated in 1.x and will be removed before 2.0. Instead, use ' . __NAMESPACE__ . '\DateTimeDatelistNoTimeWidget.', E_USER_DEPRECATED);
   }
 
 }
