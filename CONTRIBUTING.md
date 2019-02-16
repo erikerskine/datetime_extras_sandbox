@@ -32,7 +32,7 @@ For example:
 
  - ```daterange_duration```
  - ```daterange_compact```
- - ```datetime_configurable_list```
+ - ```datetime_datelist_no_time```
 
 ### Other plugin IDs
 
@@ -56,7 +56,7 @@ Examples:
 
 ```daterange_duration``` => ```DateRangeDurationWidget```
 ```daterange_compact``` => ```DateRangeCompactFormatter```
-```datetime_configurable_list``` => ```DateTimeConfigurableListWidget```
+```datetime_datelist_no_time``` => ```DateTimeDatelistNoTimeWidget```
 
 ### Services
 
