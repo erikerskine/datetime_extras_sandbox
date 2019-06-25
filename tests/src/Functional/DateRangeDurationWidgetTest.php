@@ -40,6 +40,30 @@ class DateRangeDurationWidgetTest extends DateTestBase {
   protected $defaultSettings = ['timezone_override' => '', 'separator' => '-'];
 
   /**
+   * Gets an entity form display via the correct method based on core version.
+   *
+   * The entity_get_form_display() procedural function is the only way prior to
+   * drupal:8.8.0, but that method is deprecated in 8.8.0 and above.
+   *
+   * @param string $entity_type_id
+   *   The entity type ID.
+   * @param string $bundle_id
+   *   The entity bundle ID.
+   * @param string $form_mode
+   *   Which form mode to load.
+   *
+   * @return \Drupal\Core\Entity\Display\EntityFormDisplayInterface
+   *   The entity form display associated with the given form mode.
+   */
+  protected function getFormDisplay($entity_type_id, $bundle_id, $form_mode) {
+    if (floatval(\Drupal::VERSION) >= 8.8) {
+      return \Drupal::service('entity_display.repository')
+        ->getFormDisplay($entity_type_id, $bundle_id, $form_mode);
+    }
+    return entity_get_form_display($entity_type_id, $bundle_id, $form_mode);
+  }
+
+  /**
    * Tests Date Range List Widget functionality.
    */
   public function testDateRangeDurationWidget() {
@@ -54,7 +78,7 @@ class DateRangeDurationWidgetTest extends DateTestBase {
     $this->fieldStorage->save();
 
     // Change the widget to a daterange_duration with some default settings.
-    entity_get_form_display($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
+    $this->getFormDisplay($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
       ->setComponent($field_name, [
         'type' => 'daterange_duration',
         'settings' => [
@@ -173,7 +197,7 @@ class DateRangeDurationWidgetTest extends DateTestBase {
 
     // Now, change the widget settings to use the full duration granularity.
     // Change the widget to a daterange_duration with some default settings.
-    entity_get_form_display($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
+    $this->getFormDisplay($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
       ->setComponent($field_name, [
         'type' => 'daterange_duration',
         'settings' => [
@@ -260,7 +284,7 @@ class DateRangeDurationWidgetTest extends DateTestBase {
     // Test the widget for validation notifications.
     // Change the widget settings to use the full duration granularity, but
     // no default duration.
-    entity_get_form_display($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
+    $this->getFormDisplay($this->field->getTargetEntityTypeId(), $this->field->getTargetBundle(), 'default')
       ->setComponent($field_name, [
         'type' => 'daterange_duration',
         'settings' => [

@@ -15,9 +15,11 @@ use Drupal\Core\Field\FieldDefinitionInterface;
  *   }
  * )
  *
- * @deprecated in 1.x and will be removed before 2.0. Use
+ * @deprecated in datetime_extras:8.x-1.0 and is removed from
+ * datetime_extras:8.x-2.0. Use
  * \Drupal\datetime_extras\Plugin\Field\FieldWidget\DateTimeDatelistNoTimeWidget
  * instead.
+ * @see https://www.drupal.org/node/2973035
  */
 class DateConfigurableListWidget extends DateTimeDatelistNoTimeWidget {
 
@@ -26,7 +28,7 @@ class DateConfigurableListWidget extends DateTimeDatelistNoTimeWidget {
    */
   public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
-    @trigger_error('The ' . __NAMESPACE__ . '\DateConfigurableListWidget is deprecated in 1.x and will be removed before 2.0. Instead, use ' . __NAMESPACE__ . '\DateTimeDatelistNoTimeWidget.', E_USER_DEPRECATED);
+    @trigger_error('The ' . __NAMESPACE__ . '\DateConfigurableListWidget is deprecated in datetime_extras:8.x-1.0 and is removed from datetime_extras:8.x-2.0. Use ' . __NAMESPACE__ . '\DateTimeDatelistNoTimeWidget instead. See https://www.drupal.org/node/2973035', E_USER_DEPRECATED);
   }
 
 }
