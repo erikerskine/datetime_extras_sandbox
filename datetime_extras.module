@@ -5,6 +5,7 @@
  * Hooks for the datetime_extras module.
  */
 
+use Drupal\Core\Extension\Exception\UnknownExtensionException;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -23,10 +24,19 @@ function datetime_extras_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_field_widget_info_alter().
  *
- * Remove the daterange_duration widget unless duration_field module is enabled.
+ * Remove the daterange_duration widget unless a sufficiently modern version of
+ * duration_field module is enabled.
  */
 function datetime_extras_field_widget_info_alter(array &$info) {
-  if (!\Drupal::moduleHandler()->moduleExists('duration_field')) {
+  try {
+    $duration_field_info = \Drupal::service('extension.list.module')->getExtensionInfo('duration_field');
+    if (version_compare($duration_field_info['version'], '8.x-2.0-rc2', '<')) {
+      // If we don't have 8.x-2.0-rc2 or later, hide the widget.
+      unset($info['daterange_duration']);
+    }
+  }
+  catch (UnknownExtensionException $e) {
+    // Also hide the widget if there is no duration_field module at all.
     unset($info['daterange_duration']);
   }
 }
