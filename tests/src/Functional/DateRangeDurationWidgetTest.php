@@ -28,6 +28,11 @@ class DateRangeDurationWidgetTest extends DateTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   protected function getTestFieldType() {
     return 'daterange';
   }
