@@ -104,8 +104,10 @@ class DateRangeDurationWidgetTest extends DateTestBase {
     $this->assertFieldByName("{$field_name}[0][value][time]", '', 'Start time element found.');
 
     $end_type_id = "edit-{$field_name}-0-end-type";
-    $this->assertTrue($this->xpath('//div[@id=:id]//input[@value=:value]', [':id' => $end_type_id, ':value' => 'duration']), 'A radio button has a "Duration" choice.');
-    $this->assertTrue($this->xpath('//div[@id=:id]//input[@value=:value]', [':id' => $end_type_id, ':value' => 'end_date']), 'A radio button has an "End date" choice.');
+    $duration_radio = $this->xpath('//div[@id=:id]//input[@value=:value]', [':id' => $end_type_id, ':value' => 'duration']);
+    $this->assertCount(1, $duration_radio, 'A radio button has a "Duration" choice.');
+    $end_date_radio = $this->xpath('//div[@id=:id]//input[@value=:value]', [':id' => $end_type_id, ':value' => 'end_date']);
+    $this->assertCount(1, $end_date_radio, 'A radio button has an "End date" choice.');
 
     // No JS, these should still be visible.
     $this->assertFieldByName("{$field_name}[0][end_value][date]", '', 'End date element found.');

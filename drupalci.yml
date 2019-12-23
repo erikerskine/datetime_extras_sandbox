@@ -3,8 +3,10 @@
 build:
   assessment:
     validate_codebase:
+      container_command:
+        commands:
+          - "cd ${SOURCE_DIR} && cd modules/contrib/duration_field && sudo -u www-data curl https://www.drupal.org/files/issues/2019-11-08/3093354-2.patch | patch -p1"
       phplint:
-      container_composer:
       phpcs:
         # phpcs will use core's specified version of Coder.
         sniff-all-files: true
