@@ -5,7 +5,6 @@
  * Hooks for the datetime_extras module.
  */
 
-use Drupal\Core\Extension\Exception\UnknownExtensionException;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -28,15 +27,8 @@ function datetime_extras_help($route_name, RouteMatchInterface $route_match) {
  * duration_field module is enabled.
  */
 function datetime_extras_field_widget_info_alter(array &$info) {
-  try {
-    $duration_field_info = \Drupal::service('extension.list.module')->getExtensionInfo('duration_field');
-    if (version_compare($duration_field_info['version'], '8.x-2.0-rc2', '<')) {
-      // If we don't have 8.x-2.0-rc2 or later, hide the widget.
-      unset($info['daterange_duration']);
-    }
-  }
-  catch (UnknownExtensionException $e) {
-    // Also hide the widget if there is no duration_field module at all.
+  if (!method_exists('\Drupal\duration_field\Service\DurationService', 'convertDateArrayToDateInterval')) {
+    // If we don't have 8.x-2.0-rc2 or later, hide the widget.
     unset($info['daterange_duration']);
   }
 }
