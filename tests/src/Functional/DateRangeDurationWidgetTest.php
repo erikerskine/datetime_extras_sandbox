@@ -50,6 +50,9 @@ class DateRangeDurationWidgetTest extends DateTestBase {
    * The entity_get_form_display() procedural function is the only way prior to
    * drupal:8.8.0, but that method is deprecated in 8.8.0 and above.
    *
+   * @todo In https://www.drupal.org/node/3129008 remove this technical debt
+   *   once we drop support for Drupal core version 8.7.x.
+   *
    * @param string $entity_type_id
    *   The entity type ID.
    * @param string $bundle_id
@@ -65,6 +68,13 @@ class DateRangeDurationWidgetTest extends DateTestBase {
       return \Drupal::service('entity_display.repository')
         ->getFormDisplay($entity_type_id, $bundle_id, $form_mode);
     }
+    /**
+     * This is fallback code for 8.7.x and below. It's not called on later
+     * versions, so we don't nee to "fix" it for upgrade_status.
+     *
+     * @noRector
+     * @phpstan-ignore-next-line
+     */
     return entity_get_form_display($entity_type_id, $bundle_id, $form_mode);
   }
 

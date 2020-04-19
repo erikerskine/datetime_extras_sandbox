@@ -39,7 +39,17 @@ class DateConfigurableListWidgetTest extends KernelTestBase {
       ],
     ];
 
-    $this->expectDeprecation('The Drupal\datetime_extras\Plugin\Field\FieldWidget\DateConfigurableListWidget is deprecated in datetime_extras:8.x-1.0 and is removed from datetime_extras:8.x-2.0. Use Drupal\datetime_extras\Plugin\Field\FieldWidget\DateTimeDatelistNoTimeWidget instead. See https://www.drupal.org/node/2973035');
+    // @todo In https://www.drupal.org/node/3129008 remove this technical debt
+    //   once we drop support for Drupal core version 8.7.x.
+    $expected_message = 'The Drupal\datetime_extras\Plugin\Field\FieldWidget\DateConfigurableListWidget is deprecated in datetime_extras:8.x-1.0 and is removed from datetime_extras:8.x-2.0. Use Drupal\datetime_extras\Plugin\Field\FieldWidget\DateTimeDatelistNoTimeWidget instead. See https://www.drupal.org/node/2973035';
+    if (method_exists($this, 'addExpectedDeprecationMessage')) {
+      $this->addExpectedDeprecationMessage($expected_message);
+    }
+    else {
+      /// @noRector
+      /// @phpstan-ignore-next-line
+      $this->expectDeprecation($expected_message);
+    }
     $this->container->get('plugin.manager.field.widget')->getInstance($widget_options);
   }
 
