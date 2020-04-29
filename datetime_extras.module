@@ -16,6 +16,17 @@ function datetime_extras_help($route_name, RouteMatchInterface $route_match) {
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('The Datetime Extras module provides additional functionality to extend the core Datetime and Datetime Range modules.') . '</p>';
+      $output .= '<h3>' . t('Displaying date/time ranges') . '</h3>';
+      $output .= '<p>' . t('Date/time range fields can be displayed using the <em>Compact</em> field formatter on the field display settings page for any content type. If this formatter is used, you can choose a format from a predefined list that can be managed on the <a href=":daterange_format_list">Date and time range formats</a> page.', [':daterange_format_list' => Url::fromRoute('entity.daterange_compact_format.collection')->toString()]) . '</p>';
+      $output .= '<h4>' . t('Examples') . '</h4>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Date only, start & end are within the same month') . '</dt>';
+      $output .= '<dd>' . t('24-25 January 2017') . '</dd>';
+      $output .= '<dt>' . t('Date only, start & end date are within the same year') . '</dt>';
+      $output .= '<dd>' . t('29 January-3 February 2017') . '</dd>';
+      $output .= '<dt>' . t('Date and time, start & end are both on the same day') . '</dt>';
+      $output .= '<dd>' . t('9:00am-4:30pm, 1 April 2017') . '</dd>';
+      $output .= '</dl>';
       return $output;
   }
 }
