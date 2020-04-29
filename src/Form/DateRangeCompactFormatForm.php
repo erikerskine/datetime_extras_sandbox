@@ -39,160 +39,113 @@ class DateRangeCompactFormatForm extends EntityForm {
       '#disabled' => !$format->isNew(),
     ];
 
-    $date_settings = $format->getDateSettings();
-
-    $form['date'] = [
+    $form['formats'] = [
       '#type' => 'vertical_tabs',
-      '#title' => $this->t('Date only formats'),
+      '#title' => $this->t('Formats'),
       '#tree' => FALSE,
     ];
 
-    $form['date']['basic'] = [
+    $form['formats']['basic'] = [
       '#type' => 'details',
       '#title' => $this->t('Basic'),
       '#open' => TRUE,
       '#weight' => 1,
-      '#group' => 'date',
-      '#description' => $this->t('Basic date format used for single dates, or ranges that cannot be shown in a compact form.'),
+      '#group' => 'formats',
+      '#description' => $this->t('Basic format used for ranges that cannot be shown in a compact form.'),
     ];
 
-    $form['date']['basic']['default_pattern'] = [
+    $form['formats']['basic']['default_pattern'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Pattern'),
-      '#default_value' => $date_settings['default_pattern'] ?: '',
+      '#default_value' => $format->get('default_pattern') ?: '',
       '#maxlength' => 100,
       '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
       '#required' => TRUE,
-      '#parents' => ['date_settings', 'default_pattern'],
     ];
 
-    $form['date']['basic']['separator'] = [
+    $form['formats']['basic']['separator'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Separator'),
-      '#default_value' => $date_settings['separator'] ?: '',
+      '#default_value' => $format->get('separator') ?: '',
       '#maxlength' => 100,
       '#size' => 10,
       '#description' => $this->t('Text between start and end dates.'),
       '#required' => FALSE,
-      '#parents' => ['date_settings', 'separator'],
     ];
 
-    $form['date']['same_month'] = [
-      '#type' => 'details',
-      '#title' => $this->t('Same month'),
-      '#open' => TRUE,
-      '#weight' => 2,
-      '#group' => 'date',
-      '#description' => $this->t('Optional formatting of date ranges that span multiple days within the same month.'),
-    ];
-
-    $form['date']['same_month']['same_month_start_pattern'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Start date pattern'),
-      '#default_value' => $date_settings['same_month_start_pattern'] ?: '',
-      '#maxlength' => 100,
-      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#parents' => ['date_settings', 'same_month_start_pattern'],
-    ];
-
-    $form['date']['same_month']['same_month_end_pattern'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('End date pattern'),
-      '#default_value' => $date_settings['same_month_end_pattern'] ?: '',
-      '#maxlength' => 100,
-      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#parents' => ['date_settings', 'same_month_end_pattern'],
-    ];
-
-    $form['date']['same_year'] = [
-      '#type' => 'details',
-      '#title' => $this->t('Same year'),
-      '#open' => TRUE,
-      '#weight' => 2,
-      '#group' => 'date',
-      '#description' => $this->t('Optional formatting of date ranges that span multiple months within the same year.'),
-    ];
-
-    $form['date']['same_year']['same_year_start_pattern'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Start date pattern'),
-      '#default_value' => $date_settings['same_year_start_pattern'] ?: '',
-      '#maxlength' => 100,
-      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#parents' => ['date_settings', 'same_year_start_pattern'],
-    ];
-
-    $form['date']['same_year']['same_year_end_pattern'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('End date pattern'),
-      '#default_value' => $date_settings['same_year_end_pattern'] ?: '',
-      '#maxlength' => 100,
-      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#parents' => ['date_settings', 'same_year_end_pattern'],
-    ];
-
-    $datetime_settings = $format->getDateTimeSettings();
-
-    $form['datetime'] = [
-      '#type' => 'vertical_tabs',
-      '#title' => $this->t('Date & time formats'),
-    ];
-
-    $form['datetime']['basic'] = [
-      '#type' => 'details',
-      '#title' => $this->t('Basic'),
-      '#open' => TRUE,
-      '#weight' => 1,
-      '#group' => 'datetime',
-      '#description' => $this->t('Basic date and time format used for single date/times, or ranges that cannot be shown in a compact form.'),
-    ];
-
-    $form['datetime']['basic']['default_pattern'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Pattern'),
-      '#default_value' => $datetime_settings['default_pattern'] ?: '',
-      '#maxlength' => 100,
-      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#required' => TRUE,
-      '#parents' => ['datetime_settings', 'default_pattern'],
-    ];
-
-    $form['datetime']['basic']['separator'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Separator'),
-      '#default_value' => $datetime_settings['separator'] ?: '',
-      '#maxlength' => 100,
-      '#size' => 10,
-      '#description' => $this->t('Text between start and end date/times.'),
-      '#required' => FALSE,
-      '#parents' => ['datetime_settings', 'separator'],
-    ];
-
-    $form['datetime']['same_day'] = [
+    $form['formats']['same_day'] = [
       '#type' => 'details',
       '#title' => $this->t('Same day'),
       '#open' => TRUE,
       '#weight' => 2,
-      '#group' => 'datetime',
-      '#description' => $this->t('Optional formatting of time ranges within a single day.'),
+      '#group' => 'formats',
+      '#description' => $this->t('Optional formatting of time ranges within a single day. Do not use this for date-only formats.'),
     ];
 
-    $form['datetime']['same_day']['same_day_start_pattern'] = [
+    $form['formats']['same_day']['same_day_start_pattern'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Start date/time pattern'),
-      '#default_value' => $datetime_settings['same_day_start_pattern'] ?: '',
+      '#default_value' => $format->get('same_day_start_pattern') ?: '',
       '#maxlength' => 100,
       '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#parents' => ['datetime_settings', 'same_day_start_pattern'],
     ];
 
-    $form['datetime']['same_day']['same_day_end_pattern'] = [
+    $form['formats']['same_day']['same_day_end_pattern'] = [
       '#type' => 'textfield',
       '#title' => $this->t('End date/time pattern'),
-      '#default_value' => $datetime_settings['same_day_end_pattern'] ?: '',
+      '#default_value' => $format->get('same_day_end_pattern') ?: '',
       '#maxlength' => 100,
       '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
-      '#parents' => ['datetime_settings', 'same_day_end_pattern'],
+    ];
+
+    $form['formats']['same_month'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Same month'),
+      '#open' => TRUE,
+      '#weight' => 3,
+      '#group' => 'formats',
+      '#description' => $this->t('Optional formatting of date ranges that span multiple days within the same month.'),
+    ];
+
+    $form['formats']['same_month']['same_month_start_pattern'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Start date pattern'),
+      '#default_value' => $format->get('same_month_start_pattern') ?: '',
+      '#maxlength' => 100,
+      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
+    ];
+
+    $form['formats']['same_month']['same_month_end_pattern'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('End date pattern'),
+      '#default_value' => $format->get('same_month_end_pattern') ?: '',
+      '#maxlength' => 100,
+      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
+    ];
+
+    $form['formats']['same_year'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Same year'),
+      '#open' => TRUE,
+      '#weight' => 4,
+      '#group' => 'formats',
+      '#description' => $this->t('Optional formatting of date ranges that span multiple months within the same year.'),
+    ];
+
+    $form['formats']['same_year']['same_year_start_pattern'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Start date pattern'),
+      '#default_value' => $format->get('same_year_start_pattern') ?: '',
+      '#maxlength' => 100,
+      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
+    ];
+
+    $form['formats']['same_year']['same_year_end_pattern'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('End date pattern'),
+      '#default_value' => $format->get('same_year_end_pattern') ?: '',
+      '#maxlength' => 100,
+      '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
     ];
 
     return $form;

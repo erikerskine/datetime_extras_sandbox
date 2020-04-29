@@ -8,46 +8,30 @@ datetime_extras.daterange_compact_format.*:
     label:
       type: label
       label: 'Label'
-
-    date_settings:
-      type: mapping
-      label: 'Date settings'
-      mapping:
-        default_pattern:
-          type: string
-          label: 'Default pattern'
-        separator:
-          type: string
-          label: 'Separator'
-        same_month_start_pattern:
-          type: string
-          label: 'Same month start pattern'
-        same_month_end_pattern:
-          type: string
-          label: 'Same month end pattern'
-        same_year_start_pattern:
-          type: string
-          label: 'Same year start pattern'
-        same_year_end_pattern:
-          type: string
-          label: 'Same year end pattern'
-
-    datetime_settings:
-      type: mapping
-      label: 'Datetime settings'
-      mapping:
-        default_pattern:
-          type: string
-          label: 'Default pattern'
-        separator:
-          type: string
-          label: 'Separator'
-        same_day_start_pattern:
-          type: string
-          label: 'Same day start pattern'
-        same_day_end_pattern:
-          type: string
-          label: 'Same day end pattern'
+    default_pattern:
+      type: string
+      label: 'Default pattern'
+    separator:
+      type: string
+      label: 'Separator'
+    same_day_start_pattern:
+      type: string
+      label: 'Same day start pattern'
+    same_day_end_pattern:
+      type: string
+      label: 'Same day end pattern'
+    same_month_start_pattern:
+      type: string
+      label: 'Same month start pattern'
+    same_month_end_pattern:
+      type: string
+      label: 'Same month end pattern'
+    same_year_start_pattern:
+      type: string
+      label: 'Same year start pattern'
+    same_year_end_pattern:
+      type: string
+      label: 'Same year end pattern'
 
 field.widget.settings.daterange_duration:
   type: mapping

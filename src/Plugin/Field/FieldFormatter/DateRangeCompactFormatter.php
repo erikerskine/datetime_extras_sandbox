@@ -145,7 +145,7 @@ class DateRangeCompactFormatter extends FormatterBase implements ContainerFactor
 
         if ($this->getFieldSetting('datetime_type') == DateTimeItem::DATETIME_TYPE_DATE) {
           $timezone = DateTimeItemInterface::STORAGE_TIMEZONE;
-          $text = $this->formatter->formatDateRange($start_timestamp, $end_timestamp, $format, $timezone);
+          $text = $this->formatter->formatDateTimeRange($start_timestamp, $end_timestamp, $format, $timezone);
         }
         else {
           $timezone = date_default_timezone_get();

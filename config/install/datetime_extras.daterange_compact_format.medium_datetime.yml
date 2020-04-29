@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: medium_datetime
+label: 'Medium (date & time)'
+default_pattern: 'j F Y H:i'
+separator: '–'
+same_day_start_pattern: 'j F Y H:i'
+same_day_end_pattern: 'H:i'
+same_month_start_pattern: ''
+same_month_end_pattern: ''
+same_year_start_pattern: ''
+same_year_end_pattern: ''

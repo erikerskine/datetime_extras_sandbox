@@ -134,13 +134,13 @@ class DateRangeCompactFieldFormatterTest extends KernelTestBase {
     $this->defaultDisplay->setComponent($this->dateFieldName, [
       'type' => 'daterange_compact',
       'settings' => [
-        'format_type' => 'medium',
+        'format_type' => 'medium_date',
       ],
     ]);
     $this->defaultDisplay->setComponent($this->dateTimeFieldName, [
       'type' => 'daterange_compact',
       'settings' => [
-        'format_type' => 'medium',
+        'format_type' => 'medium_datetime',
       ],
     ]);
     $this->defaultDisplay->save();

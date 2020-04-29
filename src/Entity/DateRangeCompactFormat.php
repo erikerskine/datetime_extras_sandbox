@@ -39,8 +39,14 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   config_export = {
  *     "id",
  *     "label",
- *     "date_settings",
- *     "datetime_settings"
+ *     "default_pattern",
+ *     "separator",
+ *     "same_day_start_pattern",
+ *     "same_day_end_pattern",
+ *     "same_month_start_pattern",
+ *     "same_month_end_pattern",
+ *     "same_year_start_pattern",
+ *     "same_year_end_pattern",
  *   }
  * )
  */
@@ -59,20 +65,6 @@ class DateRangeCompactFormat extends ConfigEntityBase implements DateRangeCompac
    * @var string
    */
   protected $label;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDateSettings() {
-    return $this->get('date_settings');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDateTimeSettings() {
-    return $this->get('datetime_settings');
-  }
 
   /**
    * {@inheritdoc}
