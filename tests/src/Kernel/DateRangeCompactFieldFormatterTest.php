@@ -176,7 +176,7 @@ class DateRangeCompactFieldFormatterTest extends KernelTestBase {
     $entity->{$this->dateFieldName}->end_value = '2020-12-31';
     $this->renderEntityFields($entity, $this->defaultDisplay);
 
-    $expected = '1 January–31 December 2020';
+    $expected = '1 January – 31 December 2020';
     $message = 'Expecting the rendered entity to show "' . $expected . '"';
     $this->assertRaw($expected, $message);
   }

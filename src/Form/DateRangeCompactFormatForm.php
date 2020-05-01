@@ -63,10 +63,10 @@ class DateRangeCompactFormatForm extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['formats']['basic']['separator'] = [
+    $form['formats']['basic']['default_separator'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Separator'),
-      '#default_value' => $format->get('separator') ?: '',
+      '#default_value' => $format->get('default_separator') ?: '',
       '#maxlength' => 100,
       '#size' => 10,
       '#description' => $this->t('Text between start and end dates.'),
@@ -88,6 +88,16 @@ class DateRangeCompactFormatForm extends EntityForm {
       '#default_value' => $format->get('same_day_start_pattern') ?: '',
       '#maxlength' => 100,
       '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
+    ];
+
+    $form['formats']['same_day']['same_day_separator'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Separator'),
+      '#default_value' => $format->get('same_day_separator') ?: '',
+      '#maxlength' => 100,
+      '#size' => 10,
+      '#description' => $this->t('Text between start and end dates. If left blank, the basic separator is used.'),
+      '#required' => FALSE,
     ];
 
     $form['formats']['same_day']['same_day_end_pattern'] = [
@@ -115,6 +125,16 @@ class DateRangeCompactFormatForm extends EntityForm {
       '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
     ];
 
+    $form['formats']['same_month']['same_month_separator'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Separator'),
+      '#default_value' => $format->get('same_month_separator') ?: '',
+      '#maxlength' => 100,
+      '#size' => 10,
+      '#description' => $this->t('Text between start and end dates. If left blank, the basic separator is used.'),
+      '#required' => FALSE,
+    ];
+
     $form['formats']['same_month']['same_month_end_pattern'] = [
       '#type' => 'textfield',
       '#title' => $this->t('End date pattern'),
@@ -138,6 +158,16 @@ class DateRangeCompactFormatForm extends EntityForm {
       '#default_value' => $format->get('same_year_start_pattern') ?: '',
       '#maxlength' => 100,
       '#description' => $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.'),
+    ];
+
+    $form['formats']['same_year']['same_year_separator'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Separator'),
+      '#default_value' => $format->get('same_year_separator') ?: '',
+      '#maxlength' => 100,
+      '#size' => 10,
+      '#description' => $this->t('Text between start and end dates. If left blank, the basic separator is used.'),
+      '#required' => FALSE,
     ];
 
     $form['formats']['same_year']['same_year_end_pattern'] = [

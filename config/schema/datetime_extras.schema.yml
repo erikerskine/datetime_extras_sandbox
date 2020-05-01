@@ -11,7 +11,7 @@ datetime_extras.daterange_compact_format.*:
     default_pattern:
       type: string
       label: 'Default pattern'
-    separator:
+    default_separator:
       type: string
       label: 'Separator'
     same_day_start_pattern:
@@ -20,18 +20,27 @@ datetime_extras.daterange_compact_format.*:
     same_day_end_pattern:
       type: string
       label: 'Same day end pattern'
+    same_day_separator:
+      type: string
+      label: 'Same day separator'
     same_month_start_pattern:
       type: string
       label: 'Same month start pattern'
     same_month_end_pattern:
       type: string
       label: 'Same month end pattern'
+    same_month_separator:
+      type: string
+      label: 'Same month separator'
     same_year_start_pattern:
       type: string
       label: 'Same year start pattern'
     same_year_end_pattern:
       type: string
       label: 'Same year end pattern'
+    same_year_separator:
+      type: string
+      label: 'Same year separator'
 
 field.widget.settings.daterange_duration:
   type: mapping

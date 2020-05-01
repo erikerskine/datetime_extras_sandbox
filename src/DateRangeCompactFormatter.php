@@ -48,7 +48,7 @@ class DateRangeCompactFormatter implements DateRangeCompactFormatterInterface {
     /** @var \Drupal\datetime_extras\Entity\DateRangeCompactFormatInterface $format */
     $format = $this->formatStorage->load($type);
     $default_pattern = $format->get('default_pattern');
-    $separator = $format->get('separator') ?: '';
+    $default_separator = $format->get('default_separator') ?: '';
 
     // Strings containing the ISO-8601 representations of the start and end
     // datetime can be used to determine if the date and/or time are the same.
@@ -64,6 +64,7 @@ class DateRangeCompactFormatter implements DateRangeCompactFormatterInterface {
       // The range is contained within a single day.
       $start_pattern = $format->get('same_day_start_pattern') ?: '';
       $end_pattern = $format->get('same_day_end_pattern') ?: '';
+      $separator = $format->get('same_day_separator') ?: $default_separator;
       if ($start_pattern && $end_pattern) {
         $start_text = $this->coreDateFormatter->format($start_timestamp, 'custom', $start_pattern, $timezone, $langcode);
         $end_text = $this->coreDateFormatter->format($end_timestamp, 'custom', $end_pattern, $timezone, $langcode);
@@ -74,6 +75,7 @@ class DateRangeCompactFormatter implements DateRangeCompactFormatterInterface {
       // The range spans several days within the same month.
       $start_pattern = $format->get('same_month_start_pattern') ?: '';
       $end_pattern = $format->get('same_month_end_pattern') ?: '';
+      $separator = $format->get('same_month_separator') ?: $default_separator;
       if ($start_pattern && $end_pattern) {
         $start_text = $this->coreDateFormatter->format($start_timestamp, 'custom', $start_pattern, $timezone, $langcode);
         $end_text = $this->coreDateFormatter->format($end_timestamp, 'custom', $end_pattern, $timezone, $langcode);
@@ -84,6 +86,7 @@ class DateRangeCompactFormatter implements DateRangeCompactFormatterInterface {
       // The range spans several months within the same year.
       $start_pattern = $format->get('same_year_start_pattern') ?: '';
       $end_pattern = $format->get('same_year_end_pattern') ?: '';
+      $separator = $format->get('same_year_separator') ?: $default_separator;
       if ($start_pattern && $end_pattern) {
         $start_text = $this->coreDateFormatter->format($start_timestamp, 'custom', $start_pattern, $timezone, $langcode);
         $end_text = $this->coreDateFormatter->format($end_timestamp, 'custom', $end_pattern, $timezone, $langcode);
@@ -99,7 +102,7 @@ class DateRangeCompactFormatter implements DateRangeCompactFormatterInterface {
     if ($start_text === $end_text) {
       return $start_text;
     } else {
-      return $start_text . $separator . $end_text;
+      return $start_text . $default_separator . $end_text;
     }
   }
 

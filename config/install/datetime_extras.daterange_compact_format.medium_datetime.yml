@@ -4,10 +4,13 @@ dependencies: {  }
 id: medium_datetime
 label: 'Medium (date & time)'
 default_pattern: 'j F Y H:i'
-separator: '–'
+default_separator: ' – '
 same_day_start_pattern: 'j F Y H:i'
 same_day_end_pattern: 'H:i'
+same_day_separator: –
 same_month_start_pattern: ''
 same_month_end_pattern: ''
+same_month_separator: ''
 same_year_start_pattern: ''
 same_year_end_pattern: ''
+same_year_separator: ''

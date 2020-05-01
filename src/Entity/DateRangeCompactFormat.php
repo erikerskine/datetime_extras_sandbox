@@ -40,13 +40,16 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "id",
  *     "label",
  *     "default_pattern",
- *     "separator",
+ *     "default_separator",
  *     "same_day_start_pattern",
  *     "same_day_end_pattern",
+ *     "same_day_separator",
  *     "same_month_start_pattern",
  *     "same_month_end_pattern",
+ *     "same_month_separator",
  *     "same_year_start_pattern",
  *     "same_year_end_pattern",
+ *     "same_year_separator",
  *   }
  * )
  */
