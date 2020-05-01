@@ -73,6 +73,26 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
       'default_pattern' => 'Y-m-d\TH:i:s',
       'separator' => ' - ',
     ])->save();
+
+    // Create a "year only" format to addresses the use case in #2890621,
+    // where smaller units of time are omitted from the output.
+    DateRangeCompactFormat::create([
+      'id' => 'year_only',
+      'label' => 'Year only',
+      'default_pattern' => 'Y',
+      'separator' => '-',
+    ])->save();
+
+    // Create a "month & year only" format to addresses the use case in
+    // #2890621, where smaller units of time are omitted from the output.
+    DateRangeCompactFormat::create([
+      'id' => 'month_and_year_only',
+      'label' => 'Month & year only',
+      'default_pattern' => 'F Y',
+      'separator' => '-',
+      'same_year_start_pattern' => 'F',
+      'same_year_end_pattern' => 'F Y',
+    ])->save();
   }
 
   /**
@@ -89,6 +109,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_date' => '1 January 2017',
         'usa_date' => 'January 1st, 2017',
         'iso_8601_date' => '2017-01-01',
+        'year_only' => '2017',
+        'month_and_year_only' => 'January 2017',
       ],
     ];
 
@@ -100,6 +122,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_date' => '2–3 January 2017',
         'usa_date' => 'January 2nd - 3rd, 2017',
         'iso_8601_date' => '2017-01-02 - 2017-01-03',
+        'year_only' => '2017',
+        'month_and_year_only' => 'January 2017',
       ],
     ];
 
@@ -111,6 +135,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_date' => '4 January–5 February 2017',
         'usa_date' => 'January 4th - February 5th, 2017',
         'iso_8601_date' => '2017-01-04 - 2017-02-05',
+        'year_only' => '2017',
+        'month_and_year_only' => 'January-February 2017',
       ],
     ];
 
@@ -122,6 +148,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_date' => '6 January 2017–7 February 2018',
         'usa_date' => 'January 6th, 2017 - February 7th, 2018',
         'iso_8601_date' => '2017-01-06 - 2018-02-07',
+        'year_only' => '2017-2018',
+        'month_and_year_only' => 'January 2017-February 2018',
       ],
     ];
 
@@ -160,6 +188,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_datetime' => '1 January 2017 20:00–23:00',
         'usa_datetime' => '8:00pm - 11:00pm on January 1st, 2017',
         'iso_8601_datetime' => '2017-01-01T20:00:00 - 2017-01-01T23:00:00',
+        'year_only' => '2017',
+        'month_and_year_only' => 'January 2017',
       ],
     ];
 
@@ -171,6 +201,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_datetime' => '2 January 2017 10:00–12:00',
         'usa_datetime' => '10:00am - 12:00pm on January 2nd, 2017',
         'iso_8601_datetime' => '2017-01-02T10:00:00 - 2017-01-02T12:00:00',
+        'year_only' => '2017',
+        'month_and_year_only' => 'January 2017',
       ],
     ];
 
@@ -182,6 +214,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_datetime' => '1 January 2017 23:00–2 January 2017 02:00',
         'usa_datetime' => '11:00pm on January 1st, 2017 - 2:00am on January 2nd, 2017',
         'iso_8601_datetime' => '2017-01-01T23:00:00 - 2017-01-02T02:00:00',
+        'year_only' => '2017',
+        'month_and_year_only' => 'January 2017',
       ],
     ];
 
@@ -193,6 +227,8 @@ class DateRangeCompactFormatterTest extends KernelTestBase {
         'medium_datetime' => '1 April 2017 12:00–8 April 2017 11:00',
         'usa_datetime' => '12:00pm on April 1st, 2017 - 11:00am on April 8th, 2017',
         'iso_8601_datetime' => '2017-04-01T12:00:00 - 2017-04-08T11:00:00',
+        'year_only' => '2017',
+        'month_and_year_only' => 'April 2017',
       ],
     ];
 
