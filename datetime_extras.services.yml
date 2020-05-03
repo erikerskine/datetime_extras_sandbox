@@ -1,0 +1,4 @@
+services:
+  datetime_extras.daterange_compact.formatter:
+    class: Drupal\datetime_extras\DateRangeCompactFormatter
+    arguments: ['@entity_type.manager', '@date.formatter']

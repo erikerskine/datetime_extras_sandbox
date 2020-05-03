@@ -1,0 +1,6 @@
+entity.daterange_compact_format.collection:
+  title: 'Compact date and time range formats'
+  route_name: entity.daterange_compact_format.collection
+  description: 'Configure how date and time ranges are displayed in a compact form.'
+  parent: system.admin_config_regional
+  weight: 0

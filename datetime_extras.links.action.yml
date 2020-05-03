@@ -1,0 +1,5 @@
+entity.daterange_compact_format.add_form:
+  route_name: 'entity.daterange_compact_format.add_form'
+  title: 'Add format'
+  appears_on:
+    - entity.daterange_compact_format.collection
